@@ -11,6 +11,7 @@ def add_vertex(v):
     else:
         vertices_no = vertices_no + 1
         graph[v] = []
+        print(graph)
 
 # Criando as relações ponderadas
 def add_edge(v1, v2, weight):
@@ -93,13 +94,13 @@ print_graph()
 
 # Busca em largura
 
-fail = 'A borda está vazia!'
-explored = []
+#fail = 'A borda está vazia!'
+#explored = []
 #def widthSearch():
 #    # list(graph.values())[0][0][0] -> equivale ao nome da cidade
-#    # list(graph.values())[0][0][0] -> equivale ao peso da aresta
+#    # list(graph.values())[0][0][1] -> equivale ao peso da aresta
 #    first = list(graph.values())[0][0][0]
 #    while True:
 #        if v1 or v2 not in graph:
 #            return fail
-
+#

@@ -27,7 +27,9 @@ class Graph:
             print(f'O vértice {v2} não existe!')
         else:
             temp = [v2, weight]
+            temp2 = [v1, weight]
             self.graph[v1].append(temp)
+            self.graph[v2].append(temp2)
 
     # Printando o Grafo
     def print_graph(self):
@@ -35,29 +37,15 @@ class Graph:
         for vertex in self.graph:
             for edges in self.graph[vertex]:
                 print(f'{vertex} -> {edges[0]} peso: {edges[1]}')
-    
-    #Busca em largura 
-    def BFS(self, node):
-        visited = []
-        queue = []
 
-        visited.append(node)
-        queue.append(node)
+    def breadthSearch(self, toFound):
+        fail = 'falha, o nó não possui relacionamentos!'
+        explored = []
 
-        while queue: 
-            s = queue.pop(0) 
-            print (s, end = " ") 
-
-            for neighbour in self.graph[s]:
-                if neighbour not in visited:
-                    visited.append(neighbour)
-                    queue.append(neighbour)
-
-       
-
-
-
-# Casos de teste
+        while True:
+            if len(g.graph[toFound]) == 0:
+                return print(fail)
+            self.graph[toFound]
 
 g = Graph() 
 
@@ -83,7 +71,8 @@ g.add_vertex('Eforie')
 g.add_vertex('Vaslui')
 g.add_vertex('Iasi')
 g.add_vertex('Neamt')
-
+g.add_vertex('Petesti')
+g.add_vertex('Fortaleza')
 
 # Adicionando as arestas entre os vértices
 # Structure: from / to / weight
@@ -112,44 +101,29 @@ g.add_edge('Urziceni', 'Vaslui', 142)
 g.add_edge('Vaslui', 'Iasi', 92)
 g.add_edge('Iasi', 'Neamt', 87)
 
-g.print_graph()
+#g.print_graph()
 
 #g.BFS('Sibiu')
+"""print(g.graph['Zerind'])
+print(g.graph['Zerind'].pop(0))
+print(g.graph['Zerind'])
+g.breadthSearch('Fortaleza')"""
 
-print(g)
+print(g.graph)
 
 
-#print(g.values())
-
-#BFS(g,'Oradea')
-
-# print ("Internal representation: ", graph)
-
-"""
-def BFS(grafo, s): 
+def bfs(visit_complete, graph, current_node):
+    visit_complete.append(current_node)
+    queue = []
+    queue.append(current_node)
  
-        #marca todos os vértices como não visitados.
-        visited , queue  = set(), [s]
-      
-        #cria uma fila vazia para o BFS 
+    while queue:
+        s = queue.pop(0)
+        print(s)
  
-        #pega o nó de origem, marca como visitado e insere ele na fila
-      #queue.append(s) 
-      #visited[s] = True
+        for neighbour in graph[s]:
+            if neighbour not in visit_complete:
+                visit_complete.append(neighbour)
+                queue.append(neighbour)
  
-      #enquanto a fila não for vazia
-        while queue: 
-
-            #retira o último vértice inserido na fila e imprime
-            vertice = queue.pop(0) 
-         
-            print(vertice, " ") 
- 
-            #Obtenha todos os vértices adjacentes dos vértices desenfileirados. Se um adjacente não foi visitado, marque-o como visitado e coloque-o na fila
-            if vertice not in visited: 
-                #print(visited[i])
-                visited.add(vertice)
-                queue.extend(grafo[vertice] - visited)
-        return visited
-
-"""
+bfs([], g, 'Zerind')
