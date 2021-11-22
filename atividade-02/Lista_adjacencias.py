@@ -36,30 +36,25 @@ class Graph:
             for edges in self.graph[vertex]:
                 print(f'{vertex} -> {edges[0]} peso: {edges[1]}')
     
-    def BFS(self, vertice_origem):
+    #Busca em largura 
+    def BFS(self, node):
+        visited = []
+        queue = []
 
-        # vetor com os nós visitados
-        visited = [False] * (len(self.graph)) #inicio do programa todos os vértices como não visitados.
-        
-        #cria uma fila vazia para o BFS 
-        queue = [] 
+        visited.append(node)
+        queue.append(node)
 
-        #pega o nó de origem, marca como visitado e insere ele na fila
-        queue.append(vertice_origem) 
-        visited[vertice_origem] = True
-
-        #enquanto a fila não for vazia
         while queue: 
-            #retira o último vértice inserido na fila e imprime
-            vertice_origem = queue.pop(0) 
-            print(vertice_origem, " ") 
+            s = queue.pop(0) 
+            print (s, end = " ") 
 
-            #Obtenha todos os vértices adjacentes dos vértices desenfileirados. Se um adjacente não foi visitado, marque-o como visitado e coloque-o na fila
-            for i in self.graph[vertice_origem]: 
-                #print(visited[i])
-                if visited[i] == False: 
-                    queue.append(i) 
-                    visited[i] = True
+            for neighbour in self.graph[s]:
+                if neighbour not in visited:
+                    visited.append(neighbour)
+                    queue.append(neighbour)
+
+       
+
 
 
 # Casos de teste
@@ -119,40 +114,39 @@ g.add_edge('Iasi', 'Neamt', 87)
 
 g.print_graph()
 
-g.BFS(5)
+g.BFS('Sibiu')
+
+#print(g.values())
+
+#BFS(g,'Oradea')
+
 # print ("Internal representation: ", graph)
 
-
-# Busca em largura
-
-
-
 """
-#busca em largura 
-    def BFS(self, vertice_origem):
-
-        # vetor com os nós visitados
-        visited = [False] * (len(self.graph)) #inicio do programa todos os vértices como não visitados.
-        
+def BFS(grafo, s): 
+ 
+        #marca todos os vértices como não visitados.
+        visited , queue  = set(), [s]
+      
         #cria uma fila vazia para o BFS 
-        queue = [] 
-
+ 
         #pega o nó de origem, marca como visitado e insere ele na fila
-        queue.append(vertice_origem) 
-        visited[vertice_origem] = True
-
-        #enquanto a fila não for vazia
+      #queue.append(s) 
+      #visited[s] = True
+ 
+      #enquanto a fila não for vazia
         while queue: 
-            #retira o último vértice inserido na fila e imprime
-            vertice_origem = queue.pop(0) 
-            print(vertice_origem, " ") 
 
+            #retira o último vértice inserido na fila e imprime
+            vertice = queue.pop(0) 
+         
+            print(vertice, " ") 
+ 
             #Obtenha todos os vértices adjacentes dos vértices desenfileirados. Se um adjacente não foi visitado, marque-o como visitado e coloque-o na fila
-            for i in self.graph[vertice_origem]: 
-            #print(visited[i])
-                if visited[i] == False: 
-                    queue.append(i) 
-                    visited[i] = True
-        
+            if vertice not in visited: 
+                #print(visited[i])
+                visited.add(vertice)
+                queue.extend(grafo[vertice] - visited)
+        return visited
 
 """
