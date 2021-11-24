@@ -78,8 +78,8 @@ class Graph:
                 print(self.graph[subChildren])
 
     def bfs(self, node):
-        visited = [] # List to keep track of visited nodes.
-        queue = []     #Initialize a queue 
+        visited = []            # List to keep track of visited nodes.
+        queue = []              # Initialize a queue 
         visited.append(node)
         queue.append(node)
 
