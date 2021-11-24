@@ -39,61 +39,32 @@ class Graph:
                 print(f'{vertex} -> {edges[0]} peso: {edges[1]}')
 
     # Algoritmo de busca em largura
-    def breadthSearch(self ,fromW, toFound):
+    def busca(self, fromWh, toFound):
         fail = 'falha, o nó não possui relacionamentos!'
-        fromWhere = self.graph[fromW] # essa variável carrega os filhos de fromW
         explored = []
+        visited =  []
+        cities =   []
 
-        while True:
-            if len(g.graph[fromW]) == 0: # Verifica se o nó a ser encontrado não tem nenhum relacionamento
+        visited.append(fromWh)
+
+        while len(visited) != 0:
+            city = visited.pop(0)
+
+            if len(g.graph[city]) == 0: # Verifica se o nó a ser encontrado não tem nenhum relacionamento
                 return print(fail)
-            print(fromWhere)
-            #visited = fromWhere.pop() # Remove apenas o primeiro elemento do relacionamento do nó
-            #explored.append(visited)   # Adiciona o elemento removido a lista de explorados
+            if city == toFound:
+                return print(cities)
+            cities.append(city) if city not in cities else None
 
-            for children in fromWhere: # Iterando sobre os nós filhos restantes
-                #criar um filho (variável x) na árvore de busca?
-                print(self.graph[children[0]])
-                if children not in explored or fromWhere:
-                    if children == toFound:
-                        return print("Filho encontrado!")
-            
-            
-            return 0 # para não entrar em loop infinito nos testes
-            #...
-            
-    def buscaEmLargura(self ,fromWhere, toFound):
-        fail = 'falha, o nó não possui relacionamentos!'
-        explored = []
-        edge = []
-
-        edge.append(fromWhere)
-        explored.append(fromWhere)
-        edge.pop()
-
-        for children in self.graph[fromWhere]:
-            edge.append(children[0])
-            print(f'Borda {edge}')
-            for subChildren in edge:
-                print(self.graph[subChildren])
-
-    def bfs(self, node):
-        visited = []            # List to keep track of visited nodes.
-        queue = []              # Initialize a queue 
-        visited.append(node)
-        queue.append(node)
-
-        while queue:
-            s = queue.pop(0) 
-            print (s, end = "->")
-
-            for neighbour in self.graph[s]:
-                neighbour = neighbour[0]
+            for neighbour, _ in self.graph[city]:
                 if neighbour not in visited:
+                    cities.append(neighbour) if neighbour not in cities else None
                     visited.append(neighbour)
-                    queue.append(neighbour)
-
-
+                    if neighbour == toFound:
+                        return print(cities)
+            explored.append(city)
+            
+        
 g = Graph() 
 
 # Armazenamento do número de vértices no Grafo
@@ -147,4 +118,5 @@ g.add_edge('Urziceni', 'Vaslui', 142)
 g.add_edge('Vaslui', 'Iasi', 92)
 g.add_edge('Iasi', 'Neamt', 87)
 
-g.bfs('Arad')
+
+g.busca('Arad', 'Bucharest')
