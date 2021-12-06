@@ -11,6 +11,7 @@ edges = [['Oradea', 'Zerind'], ['Sibiu', 'Oradea'], ['Zerind', 'Arad'],
          ['Fagaras', 'Bucharest'], ['Bucharest', 'Giurgiu'], ['Bucharest', 'Urziceni'],
          ['Urziceni', 'Hirsova'], ['Hirsova', 'Eforie'], ['Urziceni', 'Vaslui'],
          ['Vaslui', 'Iasi'], ['Iasi', 'Neamt']]
+print(len(edges))
 
 weights = [71, 151, 75, 118, 140, 111, 70, 75, 120, 146, 138, 97, 97, 80, 99, 211, 90, 85, 98, 86, 142, 92, 87]
 

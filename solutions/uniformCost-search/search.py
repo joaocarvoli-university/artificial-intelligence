@@ -9,9 +9,10 @@ def getCost(node):
 # Uniform Cost Search algorithm
 def ucs(self, fromWh, toFound):
     fail = "fail, this node doesn't have any relationship!"
-    explored = [[fromWh, 0]]
+    explored = [fromWh]
     visited = []
     queue = [fromWh]
+    results = []
     index, smallestCost, costLastNode = [0, 0, 0]
 
     while len(queue) != 0:
@@ -21,30 +22,28 @@ def ucs(self, fromWh, toFound):
 
         for neighbour in self.graph[city]:
             # from the second iteration sum a cost of expanded node
-            if index > 0:
+            if (index > 0) and (neighbour[0] not in explored):
                 neighbour[1] = neighbour[1] + costLastNode  # updating the cost of actual node with its parent
                 visited.append(neighbour)
-            else:
+            elif index == 0:
                 visited.append(neighbour)
+
         # Checking if the node to be explored has already been visited
         for node in visited:
-            if (node not in explored) and (node == sorted(visited, key=getCost)[0]):
-                smallestCost = node  # Getting the element name on list that has the smallest cost
-
-        # ERROR! Backing to arad
-        print(f'visited: {visited}')
+            smallestCost = sorted(visited, key=getCost)[0]
+            # Getting the element name on list that has the smallest cost
+            if node[0] == toFound:  # Checking if the actual node is what We're searching for
+                results.append(node)
         visited.pop(visited.index(smallestCost))  # Popping just the element that has the smallest cost
-        explored.append(smallestCost)
+        explored.append(smallestCost[0])
         queue.append(smallestCost[0])  # expanding based on the lowest cost node
-
-        print(f'queue: {queue}')
 
         costLastNode = smallestCost[1]  # getting the cost of the parent or of the node that will be expanded
 
         index = index + 1
         # ! this return is for test
-        if index == 5:
-            return print('close')
+        if index == 23:
+            return print(f'O menor custo para {sorted(results, key=getCost)[0][0]} é {sorted(results, key=getCost)[0][1]}')
 
 
 graph = Graph()
