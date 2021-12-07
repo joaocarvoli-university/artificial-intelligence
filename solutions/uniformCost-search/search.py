@@ -1,5 +1,5 @@
 from Graph import Graph
-from Built import createVertex, createEdges
+from Built import createVertex, createEdges, getNumEdges
 
 
 def getCost(node):
@@ -19,7 +19,6 @@ def ucs(self, fromWh, toFound):
         city = queue.pop(0)
         if len(self.graph[city]) == 0:  # Checks if the node to be found has no relationship
             return print(fail)
-
         for neighbour in self.graph[city]:
             # from the second iteration sum a cost of expanded node
             if (index > 0) and (neighbour[0] not in explored):
@@ -41,9 +40,8 @@ def ucs(self, fromWh, toFound):
         costLastNode = smallestCost[1]  # getting the cost of the parent or of the node that will be expanded
 
         index = index + 1
-        # ! this return is for test
-        if index == 23:
-            return print(f'O menor custo para {sorted(results, key=getCost)[0][0]} é {sorted(results, key=getCost)[0][1]}')
+        if index == getNumEdges():
+            return print(f'The smallest cost from {fromWh} to {sorted(results, key=getCost)[0][0]} is {sorted(results, key=getCost)[0][1]}')
 
 
 graph = Graph()
