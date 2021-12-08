@@ -1,5 +1,5 @@
-from Graph import Graph
-from Built import createVertex, createEdges, getNumEdges
+from modules.Graph import Graph
+from modules.Built import createVertex, createEdges, getNumEdges
 
 
 # This heuristic is about the smallest cost way from any city to Bucharest

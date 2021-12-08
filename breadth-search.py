@@ -1,5 +1,5 @@
-from Graph import Graph
-from Built import createVertex, createEdges
+from modules.Graph import Graph
+from modules.Built import createVertex, createEdges, getNumEdges
 
 
 # Breadth Search based on weight algorithm
