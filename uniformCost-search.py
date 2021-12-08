@@ -1,5 +1,5 @@
-from Graph import Graph
-from Built import createVertex, createEdges, getNumEdges
+from modules.Graph import Graph
+from modules.Built import createVertex, createEdges, getNumEdges
 
 
 def getCost(node):
