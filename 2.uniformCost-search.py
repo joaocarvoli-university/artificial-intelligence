@@ -29,10 +29,8 @@ def ucs(self, fromWh, toFound):
             elif index == 0:
                 visited.append(neighbour)
 
-        # Checking if the node to be explored has already been visited
-        for node in visited:
-            smallestCost = sorted(visited, key=getCost)[0]
-            # Getting the element name on list that has the smallest cost
+        
+        smallestCost = sorted(visited, key=getCost)[0] # Getting the element name on list that has the smallest cost
         visited.pop(visited.index(smallestCost))  # Popping just the element that has the smallest cost
         explored.append(smallestCost[0])
         queue.append(smallestCost[0])  # expanding based on the lowest cost node
