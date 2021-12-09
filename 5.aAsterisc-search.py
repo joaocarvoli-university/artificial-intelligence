@@ -39,8 +39,7 @@ def aAsteric(self, fromWh, toFound):
                 neighbour[1] = neighbour[1] + getHeuristic(neighbour[0])
                 visited.append(neighbour)
 
-        for node in visited:
-            smallestCost = sorted(visited, key=getCost)[0]
+        smallestCost = sorted(visited, key=getCost)[0]
         visited.pop(visited.index(smallestCost))
         explored.append(smallestCost[0])
         queue.append(smallestCost[0])
