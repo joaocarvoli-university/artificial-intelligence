@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from modules.Graph import Graph
 from modules.Built import createVertex, createEdges, getNumEdges
 
@@ -19,6 +20,7 @@ def ucs(self, fromWh, toFound):
         if len(self.graph[city]) == 0:  # Checks if the node to be found has no relationship
             return print(fail)
         if city == toFound:
+            print(list(OrderedDict.fromkeys(explored)))
             return print(f'The smallest cost from {fromWh} to {smallestCost[0]} is {smallestCost[1]}')
 
         for neighbour in self.graph[city]:
@@ -44,4 +46,4 @@ graph = Graph()
 createVertex(graph)
 createEdges(graph)
 
-ucs(graph, 'Arad', 'Bucharest')
+ucs(graph, 'Zerind', 'Bucharest')

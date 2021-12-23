@@ -8,6 +8,7 @@ def bfs(self, fromWh, toFound):
     explored = []
     visited = []
     cities = []
+    finalCost, index = [0, 0]
 
     visited.append(fromWh)
 
@@ -17,16 +18,27 @@ def bfs(self, fromWh, toFound):
         if len(self.graph[city]) == 0:  # Checks if the node to be found has no relationship
             return print(fail)
         if city == toFound:
-            return print(cities)
-        cities.append(city) if city not in cities else None
+            return print(cities), print(f'The smallest cost from {fromWh} to {toFound} is {finalCost}')
+        if index > 0:
+            if city not in cities:
+                cities.append(city)
+                finalCost = finalCost + cost
+            else:
+                None
 
-        for neighbour, _ in self.graph[city]:
+        for neighbour, cost in self.graph[city]:
             if neighbour not in visited:
-                cities.append(neighbour) if neighbour not in cities else None
+                if neighbour not in cities:
+                    cities.append(neighbour)
+                    finalCost = finalCost + cost
+                else:
+                    None
                 visited.append(neighbour)
                 if neighbour == toFound:
-                    return print(cities)
+                    return print(cities), print(f'The smallest cost from {fromWh} to {toFound} is {finalCost}')
         explored.append(city)
+
+        index = index + 1
 
 
 graph = Graph()

@@ -10,6 +10,7 @@ heuristic = {'Arad': 366, 'Bucharest': 0, 'Craiova': 160, 'Drobeta': 242, 'Efori
 
 
 def getHeuristic(city):
+    city = city[0]
     return heuristic[city]
 
 
@@ -29,17 +30,17 @@ def greedy(self, fromWh, toFound):
         if len(self.graph[city]) == 0:
             return print(fail)
         if city == toFound:
-            return print(f'The smallest cost from {fromWh} to {smallestCost[0]} is {smallestCost[1]}')
+            return print(explored), print(f'The smallest cost from {fromWh} to {smallestCost[0]} is {smallestCost[1]}')
 
         for neighbour in self.graph[city]:
             if (index > 0) and (neighbour[0] not in explored):
-                neighbour[1] = getHeuristic(neighbour[0]) + costLastNode
+                # neighbour[1] = getHeuristic(neighbour[0]) + costLastNode
+                neighbour[1] = neighbour[1] + costLastNode
                 visited.append(neighbour)
             elif index == 0:
-                neighbour[1] = getHeuristic(neighbour[0])
                 visited.append(neighbour)
 
-        smallestCost = sorted(visited, key=getCost)[0]
+        smallestCost = sorted(visited, key=getHeuristic)[0]
         visited.pop(visited.index(smallestCost))
         explored.append(smallestCost[0])
         queue.append(smallestCost[0])
@@ -53,5 +54,5 @@ graph = Graph()
 createVertex(graph)
 createEdges(graph)
 
-greedy(graph, 'Arad', 'Bucharest')
+greedy(graph, 'Zerind', 'Bucharest')
 

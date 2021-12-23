@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from modules.Graph import Graph
 from modules.Built import createVertex, createEdges, getNumEdges
 
@@ -10,7 +11,10 @@ heuristic = {'Arad': 366, 'Bucharest': 0, 'Craiova': 160, 'Drobeta': 242, 'Efori
 
 
 def getHeuristic(city):
-    return heuristic[city]
+    costtoHeuristic = getCost(city)
+    city = city[0]
+    costHeuristic = heuristic[city] + costtoHeuristic
+    return costHeuristic
 
 
 def getCost(node):
@@ -29,17 +33,18 @@ def aAsteric(self, fromWh, toFound):
         if len(self.graph[city]) == 0:
             return print(fail)
         if city == toFound:
-            return print(f'The smallest cost from {fromWh} to {smallestCost[0]} is {smallestCost[1]}')
+            return print(list(OrderedDict.fromkeys(explored))), print(f'The smallest cost from {fromWh} to {smallestCost[0]} is {smallestCost[1]}')
 
         for neighbour in self.graph[city]:
             if (index > 0) and (neighbour[0] not in explored):
-                neighbour[1] = neighbour[1] + costLastNode + getHeuristic(neighbour[0])
+                # neighbour[1] = neighbour[1] + costLastNode + getHeuristic(neighbour[0])
+                neighbour[1] = neighbour[1] + costLastNode
                 visited.append(neighbour)
             elif index == 0:
-                neighbour[1] = neighbour[1] + getHeuristic(neighbour[0])
+                # neighbour[1] = neighbour[1] + getHeuristic(neighbour[0])
                 visited.append(neighbour)
 
-        smallestCost = sorted(visited, key=getCost)[0]
+        smallestCost = sorted(visited, key=getHeuristic)[0]
         visited.pop(visited.index(smallestCost))
         explored.append(smallestCost[0])
         queue.append(smallestCost[0])
@@ -53,5 +58,5 @@ graph = Graph()
 createVertex(graph)
 createEdges(graph)
 
-aAsteric(graph, 'Arad', 'Bucharest')
+aAsteric(graph, 'Zerind', 'Bucharest')
 
